@@ -1,10 +1,13 @@
 package ru.geekbrains.mvpusers
 
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
-import ru.geekbrains.data.GitHubUser
 import ru.geekbrains.data.GitHubUserRepository
 import ru.geekbrains.mvpuser.UserScreen
 import ru.geekbrains.navigation.CustomRouter
+
+
 
 class UsersPresenter(
     private val userRepository: GitHubUserRepository,
@@ -12,12 +15,24 @@ class UsersPresenter(
 ): MvpPresenter<UsersView>() {
 
     override fun onFirstViewAttach() {
-        userRepository
-            .getUsers()
-            .let(viewState::showUsers)
+        updateContent()
     }
 
-    fun displayUser(user: GitHubUser) =
-        router.navigateTo(UserScreen(user.login))
+    fun updateContent() {
+        userRepository.getUsers()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                viewState.showUsers(it)
+            },{
+                val errorMessage = it.message
+            })
+    }
+
+    fun displayUser(login: String) =
+        router.navigateTo(UserScreen(login))
 
 }
+
+
+

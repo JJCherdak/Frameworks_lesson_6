@@ -7,8 +7,9 @@ import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import ru.geekbrains.App.Navigation.router
 import ru.geekbrains.R
-import ru.geekbrains.data.GitHubUser
 import ru.geekbrains.data.GitHubUserRepositoryFactory
+import ru.geekbrains.data.GitHubUser
+
 import ru.geekbrains.databinding.ViewUsersBinding
 import ru.geekbrains.recycler.UsersAdapter
 
@@ -35,7 +36,7 @@ class UsersFragment: MvpAppCompatFragment(R.layout.view_users), UsersView, Users
     }
 
     override fun onUserPicked(user: GitHubUser) =
-        presenter.displayUser(user)
+        presenter.displayUser(user.login!!)
 
     companion object {
         fun newInstance(): Fragment = UsersFragment()

@@ -1,6 +1,7 @@
 package ru.geekbrains.mvpuser
 
 import moxy.MvpPresenter
+import ru.geekbrains.data.GitHubApi
 import ru.geekbrains.data.GitHubUserRepository
 import ru.geekbrains.navigation.CustomRouter
 
