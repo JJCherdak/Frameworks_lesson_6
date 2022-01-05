@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class GitHubUser(
     @SerializedName ("id")
-    val id: String? = null,
+    val id: String,
     @SerializedName ("login")
     val login: String? = null,
     @SerializedName ("avatar_url")
