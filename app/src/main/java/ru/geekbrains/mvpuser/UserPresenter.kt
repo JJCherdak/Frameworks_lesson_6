@@ -25,7 +25,7 @@ class UserPresenter(
                 viewState.showUser(it)
             },{
                 val errorMessage = it.message
-                //DisplayError
+                //DisplayErro
             })
     }
 }
