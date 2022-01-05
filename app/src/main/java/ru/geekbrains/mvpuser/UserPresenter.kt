@@ -5,6 +5,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 import ru.geekbrains.data.GitHubApi
 import ru.geekbrains.data.GitHubUserRepository
+import ru.geekbrains.data.room.GitHubUserDao
 import ru.geekbrains.navigation.CustomRouter
 
 class UserPresenter(
@@ -14,18 +15,12 @@ class UserPresenter(
 ) : MvpPresenter<UserView>() {
 
     override fun onFirstViewAttach() {
-      updateContent()
-    }
-
-    fun updateContent() {
-        userRepository.getUserByLogin("mojombo")
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+        userRepository
+            .getUserByLogin(userLogin)
             .subscribe({
                 viewState.showUser(it)
-            },{
+            }, {
                 val errorMessage = it.message
-                //DisplayErro
             })
-    }
-}
+
+    }}
