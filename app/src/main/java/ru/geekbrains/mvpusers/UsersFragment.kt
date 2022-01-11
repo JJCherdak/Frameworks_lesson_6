@@ -5,9 +5,8 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
-import ru.geekbrains.App.Navigation.router
+import ru.geekbrains.App
 import ru.geekbrains.R
-import ru.geekbrains.data.GitHubUserRepositoryFactory
 import ru.geekbrains.data.GitHubUser
 
 import ru.geekbrains.databinding.ViewUsersBinding
@@ -16,10 +15,9 @@ import ru.geekbrains.recycler.UsersAdapter
 class UsersFragment: MvpAppCompatFragment(R.layout.view_users), UsersView, UsersAdapter.OnUserClickListener {
 
     private val presenter: UsersPresenter by moxyPresenter {
-        UsersPresenter(
-            userRepository = GitHubUserRepositoryFactory.create(),
-            router = router
-        )
+        UsersPresenter().apply {
+            App.instance.component.inject(this)
+        }
     }
 
     private val usersAdapter = UsersAdapter(this)
