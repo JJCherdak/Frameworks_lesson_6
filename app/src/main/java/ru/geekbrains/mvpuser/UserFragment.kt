@@ -51,4 +51,11 @@ class UserFragment: MvpAppCompatFragment(R.layout.user_fragment_view), UserView 
     override fun showName(name: String) {
         viewBinding.textView.text = name
     }
+
+    override fun setProgressBarVisibility(isVisible: Boolean) {
+        val visibility = if (isVisible){
+            View.VISIBLE
+        }else
+            View.GONE
+        viewBinding.progress.visibility = visibility}
 }

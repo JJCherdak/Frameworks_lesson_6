@@ -19,4 +19,7 @@ interface UserView : MvpView {
     @SingleState
     fun showName(name: String)
 
+    @SingleState
+    fun setProgressBarVisibility (isVisible: Boolean)
+
 }
