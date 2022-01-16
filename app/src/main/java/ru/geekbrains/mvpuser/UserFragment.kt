@@ -57,5 +57,11 @@ class UserFragment: MvpAppCompatFragment(R.layout.user_fragment_view), UserView 
             View.VISIBLE
         }else
             View.GONE
-        viewBinding.progress.visibility = visibility}
+        viewBinding.progress.visibility = visibility
+    }
+    override fun showError(isVisible: Boolean) {
+        val visibility = if (isVisible) View.VISIBLE else View.GONE
+        viewBinding.error.visibility = visibility
+    }
+
 }

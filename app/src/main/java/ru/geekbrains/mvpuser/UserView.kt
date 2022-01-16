@@ -22,4 +22,7 @@ interface UserView : MvpView {
     @SingleState
     fun setProgressBarVisibility (isVisible: Boolean)
 
+    @SingleState
+    fun showError (isVisible: Boolean)
+
 }

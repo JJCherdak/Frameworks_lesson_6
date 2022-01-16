@@ -37,10 +37,12 @@ class UserPresenter: MvpPresenter<UserView>() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 viewState.setProgressBarVisibility(false)
+                viewState.showError(false)
                 viewState.showName(it.login!!)
                 viewState.showPhoto(it.avatarUrl!!)
             },{
                 viewState.setProgressBarVisibility(false)
+                viewState.showError(false)
             })
 
     }
