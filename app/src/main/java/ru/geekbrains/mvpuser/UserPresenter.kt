@@ -31,12 +31,18 @@ class UserPresenter: MvpPresenter<UserView>() {
     override fun onFirstViewAttach() {
         repository.getUserByLogin(userLogin)
             .subscribeOn(Schedulers.io())
+            .doOnSubscribe {
+                viewState.setProgressBarVisibility(true)
+            }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
+                viewState.setProgressBarVisibility(false)
+                viewState.showError(false)
                 viewState.showName(it.login!!)
                 viewState.showPhoto(it.avatarUrl!!)
             },{
-
+                viewState.setProgressBarVisibility(false)
+                viewState.showError(false)
             })
 
     }
